@@ -1,0 +1,534 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>İMATEK MEKATRONİK | Makine İmalatı</title>
+  <meta name="description" content="İMATEK MEKATRONİK – makine imalatı, özel çözümler ve bakım hizmetleri. Endüstriyel ihtiyaçlara uçtan uca mekatronik çözümler." />
+  <meta name="theme-color" content="#5b21b6" />
+  <link rel="icon" href="/favicon.ico" />
+  <!-- Open Graph -->
+  <meta property="og:title" content="İMATEK MEKATRONİK" />
+  <meta property="og:description" content="Makine imalatında yenilikçi ve güvenilir çözümler" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="/assets/og-cover.jpg" />
+
+  <style>
+    /* ====== Reset ====== */
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    img { max-width: 100%; display: block; }
+    a { color: inherit; text-decoration: none; }
+    body { font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans"; line-height: 1.55; }
+
+    /* ====== Tema ====== */
+    :root{
+      --bg: #0b1020;
+      --card: #0f172a;
+      --surface: #101a31;
+      --text: #e5e7eb;
+      --muted: #94a3b8;
+      --border: rgba(148,163,184,.14);
+
+      --brand: #7c3aed;
+      --brand-2: #22d3ee;
+      --accent: #a78bfa;
+      --ring: rgba(124,58,237,.35);
+      --radius: 18px;
+      --shadow: 0 15px 40px rgba(0,0,0,.35);
+      --maxw: 1200px;
+    }
+    :root[data-theme="light"]{
+      --bg: #f8fafc;
+      --card: #ffffff;
+      --surface: #f3f6fb;
+      --text: #0f172a;
+      --muted: #475569;
+      --border: rgba(15,23,42,.12);
+    }
+    body { background: var(--bg); color: var(--text); }
+
+    .container { width: min(100% - 2rem, var(--maxw)); margin-inline: auto; }
+    .btn { display:inline-flex; align-items:center; gap:.6rem; padding:.9rem 1.15rem; border-radius: 999px; background: linear-gradient(135deg,var(--brand),var(--brand-2)); color:#fff; font-weight: 600; box-shadow: var(--shadow); border: none; cursor:pointer; transition:.25s ease; }
+    .btn:hover { transform: translateY(-1px); filter: brightness(1.05); }
+    .chip { display:inline-block; padding:.35rem .7rem; border-radius:999px; font-size:.85rem; color:#fff; background: linear-gradient(135deg,rgba(124,58,237,.8),rgba(34,211,238,.8)); box-shadow: var(--shadow); }
+    .section { padding: 72px 0; }
+    .card { background: linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.01)); border: 1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow); overflow: hidden; backdrop-filter: blur(6px); }
+
+    /* ====== Üstbar ====== */
+    .topbar { position: sticky; top: 0; z-index: 50; backdrop-filter: blur(10px); background: color-mix(in oklab, var(--bg) 75%, transparent); border-bottom: 1px solid var(--border); }
+    .topbar .inner { display:flex; align-items:center; justify-content:space-between; gap:.75rem; padding:.9rem 0; }
+    .brand { display:flex; align-items:center; gap:.75rem; font-weight:800; letter-spacing:.4px; }
+    .brand .logo{
+      width:40px; height:40px; border-radius:12px;
+      box-shadow: var(--shadow);
+      border:1px solid var(--border);
+      background:#fff;
+      object-fit: contain; padding:2px; display:block;
+    }
+    nav ul { list-style:none; margin:0; padding:0; display:flex; gap: 1rem; }
+    nav a { padding:.55rem .9rem; border-radius:999px; color: var(--muted); font-weight:600; transition:.2s ease; }
+    nav a.active, nav a:hover { color:#fff; background: rgba(124,58,237,.15); box-shadow: inset 0 0 0 1px rgba(124,58,237,.35); }
+    .menu-btn { display:none; border:1px solid var(--border); border-radius:12px; padding:.5rem .7rem; background: transparent; color: var(--text); }
+
+    /* Tema butonu */
+    .mode-btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      width:40px; height:40px; border-radius:999px;
+      border:1px solid var(--border); background: var(--card); color: var(--text);
+      transition:.2s ease; cursor:pointer;
+    }
+    .mode-btn:hover{ box-shadow: 0 4px 18px rgba(0,0,0,.25); transform: translateY(-1px);}
+    .mode-btn svg{ width:20px; height:20px; }
+
+    @media (max-width: 900px) {
+      nav { position: fixed; inset: 64px 1rem auto 1rem; background: color-mix(in oklab, var(--bg) 92%, transparent); border:1px solid var(--border); border-radius: 14px; padding: .75rem; display:none; }
+      nav.open { display:block; }
+      nav ul { flex-direction: column; }
+      .menu-btn { display:inline-flex; }
+    }
+
+    /* ====== Hero + Slider ====== */
+    .hero { padding-top: 28px; }
+    .hero-wrap { display:grid; gap: 1.75rem; align-items: start; grid-template-columns: 1fr; }
+    .hero h1 { font-size: clamp(1.8rem, 3.6vw, 3rem); line-height: 1.15; margin: .35rem 0 .75rem; }
+    .hero p.lead { color: var(--muted); font-size: clamp(1rem, 1.3vw, 1.15rem); margin: 0 0 1.2rem; }
+    .hero .cta-row { display:flex; gap:.75rem; flex-wrap: wrap; }
+    .slider { position: relative; aspect-ratio: 16/9; border-radius: var(--radius); overflow: hidden; border: 1px solid var(--border); box-shadow: var(--shadow); }
+    .slides { display:flex; width:100%; height:100%; transition: transform .6s cubic-bezier(.22,.7,.27,1); }
+    .slide { min-width:100%; height:100%; position:relative; display:grid; place-items:center; color:#fff; }
+    .slide::before { content:""; position:absolute; inset:0; background-size: cover; background-position:center; filter: saturate(1.05) contrast(1.05); transform: scale(1.02); }
+    .slide::after { content:""; position:absolute; inset:0; background: radial-gradient(60% 60% at 50% 50%, rgba(0,0,0,.0) 0%, rgba(0,0,0,.25) 55%, rgba(0,0,0,.55) 100%); }
+    .slide .sr-only { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); border:0; }
+    .sl-nav { position:absolute; inset:auto 0 10px 0; display:flex; justify-content:center; gap:.45rem; z-index:2; }
+    .dot { width:10px; height:10px; border-radius:50%; background: rgba(255,255,255,.45); border:1px solid rgba(255,255,255,.8); cursor:pointer; transition:.2s ease; }
+    .dot.active { background:#fff; transform: scale(1.15); }
+    .sl-ctrl { position:absolute; inset:0; display:flex; align-items:center; justify-content:space-between; padding: .75rem; z-index:2; pointer-events:none; }
+    .sl-btn { pointer-events:auto; width:40px; height:40px; border-radius:50%; display:grid; place-items:center; background: rgba(11,16,32,.55); border:1px solid rgba(148,163,184,.35); color:#fff; cursor:pointer; }
+
+    /* ====== Çözümler ====== */
+    .solutions { display:grid; grid-template-columns: repeat(12, 1fr); gap:1.25rem; }
+    .solution { grid-column: span 4; display:flex; flex-direction:column; }
+    .solution .thumb { aspect-ratio: 16/10; overflow:hidden; }
+    .solution .thumb img { width:100%; height:100%; object-fit:cover; transition: transform .35s ease; }
+    .solution:hover .thumb img { transform: scale(1.06); }
+    .solution .body { padding: 1rem; }
+    .solution h3 { margin:.2rem 0 .35rem; font-size:1.15rem; }
+    .solution p { margin:0; color: var(--muted); }
+    @media (max-width: 1024px){ .solution{ grid-column: span 6; } }
+    @media (max-width: 640px){ .solution{ grid-column: span 12; } }
+
+    .section-sub{ margin-top:32px; }
+    .section-sub .lead{ color: var(--muted); margin:.25rem 0 1rem; }
+
+    .system-sub{ margin-top:32px; }
+    .system-cards{ display:grid; gap:1rem; grid-template-columns: repeat(12, 1fr); }
+    .system-chip{ grid-column: span 4; }
+    .card.light{ background: var(--surface); color: var(--text); border-color: var(--border); }
+    .card.light:hover{ transform: translateY(-2px); box-shadow: var(--shadow); }
+    .card.light .label{ display:block; padding:.85rem 1rem; font-weight:600; letter-spacing:.2px; }
+    @media (max-width:1024px){ .system-chip{ grid-column: span 6; } }
+    @media (max-width:640px){ .system-chip{ grid-column: span 12; } }
+
+    /* ====== İletişim ====== */
+    .contact { display:grid; grid-template-columns: 1.2fr .8fr; gap: 1.25rem; }
+    @media (max-width: 980px){ .contact{ grid-template-columns:1fr; } }
+
+    .contact-card { padding: 1rem; }
+    .contact-card .item{ display:flex; gap:.6rem; align-items:flex-start; padding:.5rem 0; color:var(--text); }
+    .contact-card .item strong{ min-width: 92px; color:#cbd5e1; }
+    .contact-actions{ display:flex; gap:.6rem; flex-wrap:wrap; margin-top:.75rem; }
+
+    /* Açık renk bilgi bloğu (artık kullanılmıyor) */
+    .contact-hero{
+      margin-top: 28px;
+      background: var(--surface);
+      border:1px solid var(--border);
+      border-radius:16px;
+      padding: 48px 16px;
+      color: var(--text);
+    }
+    .contact-hero h2{ margin:0 0 .35rem; font-size: clamp(1.4rem, 2.4vw, 2rem); text-align:center; }
+    .contact-hero p.lead{ margin:.25rem 0 1rem; text-align:center; color: var(--muted); }
+    .contact-hero .lines{ display:grid; gap:.35rem; justify-items:center; font-size:1.05rem; }
+    .contact-hero a{ color: var(--text); text-decoration: underline; text-underline-offset: 3px; }
+    .contact-hero strong{ font-weight:700; }
+
+    /* ====== WhatsApp Float ====== */
+    .wa-float{
+      position: fixed; bottom: 22px; right: 22px;
+      display: inline-flex; align-items: center; gap: .55rem;
+      height: 56px; padding: .55rem 1rem;
+      border-radius: 999px;
+      background: #25D366; color: #fff; font-weight: 700;
+      box-shadow: 0 10px 25px rgba(0,0,0,.25);
+      border: 1px solid rgba(0,0,0,.08); z-index: 60;
+      transition: transform .15s ease, filter .15s ease;
+    }
+    .wa-float:hover{ transform: translateY(-1px); filter: brightness(1.05); }
+    .wa-float:active{ transform: translateY(0); }
+    .wa-float svg{ width: 28px; height: 28px; fill: #fff; }
+    .wa-float .label{ font-size: 1rem; line-height: 1; }
+    @media (max-width: 480px){
+      .wa-float{ width: 56px; padding: 0; justify-content: center; }
+      .wa-float .label{ display: none; }
+    }
+
+    /* ====== E-posta seçim penceresi ====== */
+    .email-modal{ position:fixed; inset:0; display:none; place-items:center; background:rgba(0,0,0,.45); z-index:70; }
+    .email-modal.open{ display:grid; }
+    .email-card{
+      width:min(92vw,520px);
+      background:var(--card); color:var(--text);
+      border:1px solid var(--border); border-radius:16px; box-shadow:var(--shadow);
+      padding:18px 16px 14px; position:relative;
+    }
+    .email-card h3{ margin:.2rem 0 .35rem; font-size:1.2rem; }
+    .email-card p{ margin:0 0 .8rem; color:var(--muted); }
+    .email-options{ display:grid; gap:.6rem; }
+    .email-btn{
+      display:flex; align-items:center; justify-content:center; gap:.6rem;
+      height:44px; border-radius:999px; border:1px solid var(--border);
+      background:linear-gradient(180deg,rgba(255,255,255,.03),rgba(255,255,255,.01));
+      color:var(--text); cursor:pointer; font-weight:600;
+    }
+    .email-btn:hover{ box-shadow:0 6px 18px rgba(0,0,0,.25); transform:translateY(-1px); }
+    .email-close{
+      position:absolute; right:10px; top:8px; border:1px solid var(--border);
+      width:36px; height:36px; border-radius:999px; background:transparent; color:var(--text); cursor:pointer;
+    }
+
+    /* ====== Altbilgi ====== */
+    footer { padding: 48px 0; border-top:1px solid var(--border); color: var(--muted); }
+    .foot { display:flex; align-items:center; justify-content:space-between; gap:1rem; flex-wrap: wrap; }
+
+    /* ====== Reveal ====== */
+    .reveal { opacity: 0; transform: translateY(16px); transition: opacity .6s ease, transform .6s ease; }
+    .reveal.show { opacity: 1; transform: translateY(0); }
+  </style>
+</head>
+<body>
+  <!-- ====== Üstbar ====== -->
+  <header class="topbar" aria-label="Başlık ve navigasyon">
+    <div class="container inner">
+      <a href="#home" class="brand" aria-label="İmatek Mekatronik ana sayfa">
+        <img class="logo" src="https://lh3.googleusercontent.com/p/AF1QipPcjYiP-oZ9DhzVR28NFzv-2FX1tNrK6-rSUmnh=s1360-w1360-h1020-rw" alt="İMA-TEK Mekatronik Logosu" width="44" height="44" loading="eager" decoding="async"/>
+        <span>İMATEK <span style="color:var(--accent)">MEKATRONİK</span></span>
+      </a>
+
+      <div style="display:flex; align-items:center; gap:.5rem;">
+        <button class="menu-btn" aria-label="Menüyü aç/kapat" id="menuBtn">☰</button>
+        <button id="themeToggle" class="mode-btn" aria-label="Gece/Gündüz"></button>
+      </div>
+
+      <nav id="mainNav" aria-label="Ana menü">
+        <ul>
+          <li><a href="#home" class="navlink active">Ana Sayfa</a></li>
+          <li><a href="#solutions" class="navlink">Çözümler</a></li>
+          <li><a href="#contact" class="navlink">İletişim</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ====== HERO ====== -->
+  <main id="home" class="hero section">
+    <div class="container hero-wrap">
+      <div>
+        <span class="chip">Makine İmalatı • Mekatronik Çözümler</span>
+        <h1>Endüstriyel üretiminize <span style="color:var(--accent)">hız</span> ve <span style="color:var(--brand-2)">güven</span> katıyoruz.</h1>
+        <p class="lead">İmatek Mekatronik, kimya ve tekstil sektörüne özel otomasyon çözümleri geliştiren bir mühendislik firmasıdır. Tecrübemiz, inovasyon gücümüz ve müşteri odaklı yaklaşımımızla sektörde fark yaratıyoruz.</p>
+        <div class="cta-row">
+          <a class="btn" href="#solutions">Çözümlerimizi İnceleyin</a>
+          <a class="btn" href="https://wa.me/905395618932" target="_blank" rel="noopener">WhatsApp ile Yazın</a>
+        </div>
+      </div>
+
+      <div class="slider" id="slider" aria-roledescription="carousel" aria-label="Vitrin görselleri" tabindex="0">
+        <div class="slides" id="slides">
+          <div class="slide" data-bg="https://lh3.googleusercontent.com/p/AF1QipP-oqZ24mcM0sa1Y-Ni6POIdDEihzcgg7icHNVS=s1360-w1360-h1020-rw"><span class="sr-only">CNC işleme merkezi ve üretim hattı</span></div>
+          <div class="slide" data-bg="https://lh3.googleusercontent.com/p/AF1QipMWXolgAbMBGzcvfLViZT5KBVvpeSgXuVWbrS0N=s1360-w1360-h1020-rw"><span class="sr-only">Robotik kol ile otomasyon</span></div>
+          <div class="slide" data-bg="https://lh3.googleusercontent.com/p/AF1QipOOggWlv8S3oufzxva3bUhSsqDhY8AFSkqyY5pf=s1360-w1360-h1020-rw"><span class="sr-only">Mekanik montaj ve kalite kontrol</span></div>
+          <div class="slide" data-bg="https://lh3.googleusercontent.com/p/AF1QipOYgoCu19CSHsNeIrri75w4p-uv1w61zmbrYtFu=s1360-w1360-h1020-rw"><span class="sr-only">Elektrik pano ve kablolama</span></div>
+          <div class="slide" data-bg="https://lh3.googleusercontent.com/p/AF1QipPZ5TWCXFoQMnkjED3p01iS8g8xNh7Y6AiqB_W1=s1360-w1360-h1020-rw"><span class="sr-only">Endüstriyel test ve devreye alma</span></div>
+        </div>
+        <div class="sl-ctrl">
+          <button class="sl-btn" id="prev" aria-label="Önceki">‹</button>
+          <button class="sl-btn" id="next" aria-label="Sonraki">›</button>
+        </div>
+        <div class="sl-nav" id="dots" aria-label="Slayt noktaları"></div>
+      </div>
+    </div>
+  </main>
+
+  <!-- ====== ÇÖZÜMLER ====== -->
+  <section id="solutions" class="section">
+    <div class="container">
+      <div class="section-sub">
+        <h2 class="reveal">Endüstriyel Otomasyon Çözümleri</h2>
+        <p class="lead reveal">İmatek Mekatronik olarak sunduğumuz endüstriyel otomasyon çözümleri ile üretim süreçlerinizi daha verimli, güvenli ve sürdürülebilir hale getiriyoruz.</p>
+
+        <div class="solutions">
+          <article class="card solution reveal"><div class="body"><h3>Otomasyon Uygulamaları</h3><p>Fabrika ve proseslerde uçtan uca otomasyon entegrasyonları.</p></div></article>
+          <article class="card solution reveal"><div class="body"><h3>Sensör ve Ölçüm Elemanları</h3><p>Tüm kontrol noktalarında hassas ölçüm ve güvenilir veri toplama.</p></div></article>
+          <article class="card solution reveal"><div class="body"><h3>Endüstriyel Network Tasarımları</h3><p>Profinet, Modbus, EtherCAT gibi endüstriyel ağlarla kesintisiz iletişim.</p></div></article>
+          <article class="card solution reveal"><div class="body"><h3>ERP Sistemlerine Veri Sağlama</h3><p>Üretimden ERP'ye anlık veri aktarımı ve entegrasyon çözümleri.</p></div></article>
+          <article class="card solution reveal"><div class="body"><h3>SCADA & HMI Entegrasyonu</h3><p>Gerçek zamanlı izleme ve kullanıcı dostu görsel arayüzler.</p></div></article>
+          <article class="card solution reveal"><div class="body"><h3>Enerji İzleme ve Raporlama</h3><p>Enerji tüketim analizleriyle tasarruf ve sürdürülebilirlik hedefi.</p></div></article>
+          <article class="card solution reveal"><div class="body"><h3>Uzaktan Erişim & IIoT</h3><p>Uzak bağlantı, bulut entegrasyonu ve IIoT veri yönetimi.</p></div></article>
+        </div>
+      </div>
+
+      <div class="system-sub">
+        <h2 class="reveal">Mekatronik Sistem Çözümleri</h2>
+        <p class="lead reveal">Sahada kanıtlanmış, modüler ve ölçeklenebilir mekatronik sistemlerimiz.</p>
+        <div class="system-cards">
+          <a class="card light mini system-chip reveal" href="/sistemler/ima-lcds"><span class="label">IMA-LCDS</span></a>
+          <a class="card light mini system-chip reveal" href="/sistemler/ima-lcds-x"><span class="label">IMA-LCDS-X</span></a>
+          <a class="card light mini system-chip reveal" href="/sistemler/ima-lfcs"><span class="label">IMA-LFCS</span></a>
+          <a class="card light mini system-chip reveal" href="/sistemler/ima-ae"><span class="label">IMA-AE</span></a>
+          <a class="card light mini system-chip reveal" href="/sistemler/ima-pd"><span class="label">IMA-PD</span></a>
+          <a class="card light mini system-chip reveal" href="/sistemler/ima-lp"><span class="label">IMA-LP</span></a>
+          <a class="card light mini system-chip reveal" href="/sistemler/ima-cn"><span class="label">IMA-CN</span></a>
+          <a class="card light mini system-chip reveal" href="/sistemler/ima-tf"><span class="label">IMA-TF</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== İLETİŞİM (FORM YOK) ====== -->
+  <section id="contact" class="section">
+    <div class="container contact">
+      <div class="card contact-card reveal">
+        <h2>İletişim</h2>
+        <div class="item"><strong>Adres:</strong> <span>Yavuz Selim, 76. Cad. Küçük Sanayi Sitesi No: 3 E, 46080 Dulkadiroğlu / Kahramanmaraş</span></div>
+        <div class="item"><strong>İl:</strong> <span>Kahramanmaraş</span></div>
+        <div class="item"><strong>Mobil:</strong> <a href="tel:+905395618932">0539 561 89 32</a></div>
+        <div class="item"><strong>Telefon:</strong> <a href="tel:+903442353710">0344 235 37 10</a></div>
+        <div class="item"><strong>Email:</strong> <a href="mailto:info@imatek.com">info@imatek.com</a></div>
+        <div class="item"><strong>Saatler:</strong> <span>Açık • Kapanış: 18:30</span></div>
+        <div class="contact-actions">
+          <a class="btn" href="https://wa.me/905395618932" target="_blank" rel="noopener">WhatsApp</a>
+          <a class="btn" href="tel:+905395618932">Ara</a>
+          <button class="btn" id="openEmail">E-posta Gönder</button>
+        </div>
+      </div>
+
+      <div class="card reveal" style="padding:1rem;">
+        <h3>Konum</h3>
+        <div class="thumb" style="border-radius:12px; overflow:hidden; border:1px solid var(--border)">
+          <iframe
+            title="İMATEK Mekatronik - Konum"
+            class="map-embed"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            src="https://www.google.com/maps?q=Yavuz%20Selim%2C%2076.%20Cad.%20K%C3%BC%C3%BCk%20Sanayi%20Sitesi%20No%3A%203%20E%2C%2046080%20Dulkadiro%C4%9Flu%20%2F%20Kahramanmara%C5%9F&output=embed"
+            style="width:100%; aspect-ratio: 4/3; border:0; filter: grayscale(15%);">
+          </iframe>
+        </div>
+        <p style="margin:.6rem 0 0;">
+          <a target="_blank" rel="noopener"
+             href="https://www.google.com/maps?q=Yavuz%20Selim%2C%2076.%20Cad.%20K%C3%BC%C3%BCk%20Sanayi%20Sitesi%20No%3A%203%20E%2C%2046080%20Dulkadiro%C4%9Flu%20%2F%20Kahramanmara%C5%9F">
+            Daha büyük haritayı aç
+          </a>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== Altbilgi ====== -->
+  <footer>
+    <div class="container foot">
+      <div>© <span id="year"></span> İMATEK MEKATRONİK. Tüm hakları saklıdır.</div>
+      <div style="display:flex; gap:.6rem; align-items:center;">
+        <a href="#home">Ana Sayfa</a>·<a href="#solutions">Çözümler</a>·<a href="#contact">İletişim</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- WhatsApp hızlı buton -->
+  <a class="wa-float" href="https://wa.me/905395618932" target="_blank" rel="noopener" aria-label="WhatsApp ile yazın" title="WhatsApp ile yazın">
+    <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M19.1 17.7c-.3-.1-1.7-.8-2-.9s-.5-.1-.7.1-.8.9-1 1.1-.4.2-.7.1c-.3-.1-1.2-.5-2.3-1.5-.8-.7-1.5-1.6-1.6-1.9-.2-.3 0-.5.1-.7.1-.1.3-.4.5-.6.2-.2.3-.4.4-.6.1-.2 0-.5 0-.6 0-.1-.7-1.7-.9-2.3-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.3-1.1 1.1-1.1 2.7s1.2 3.1 1.4 3.3c.2.3 2.4 3.6 5.8 5 .8.3 1.5.6 2 .7.8.2 1.4.2 1.9.1.6-.1 1.7-.7 2-1.4.2-.7.2-1.3.1-1.4-.1-.1-.3-.1-.6-.2zM16.1 3C9.8 3 4.8 8 4.8 14.3c0 2 .5 3.9 1.5 5.6L5 28.9l9.2-1.2c1.6.9 3.5 1.4 5.6 1.4 6.3 0 11.3-5.1 11.3-11.4C31.1 8 22.8 3 16.1 3z"/></svg>
+    <span class="label">WhatsApp</span>
+  </a>
+
+  <!-- ====== E-posta seçim penceresi (modal) ====== -->
+  <div class="email-modal" id="emailModal" aria-hidden="true">
+    <div class="email-card" role="dialog" aria-modal="true" aria-labelledby="emailTitle">
+      <button class="email-close" id="emailClose" aria-label="Kapat">×</button>
+      <h3 id="emailTitle">E-posta nasıl açılsın?</h3>
+      <p>Bir yöntem seçin:</p>
+      <div class="email-options">
+        <button class="email-btn" data-method="mailto">Varsayılan e-posta uygulaması</button>
+        <button class="email-btn" data-method="gmail">Gmail ile aç</button>
+        <button class="email-btn" data-method="outlook">Outlook (Web) ile aç</button>
+        <button class="email-btn" data-method="yahoo">Yahoo Mail ile aç</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // ====== Mobil Menü ======
+    const menuBtn = document.getElementById('menuBtn');
+    const nav = document.getElementById('mainNav');
+    menuBtn.addEventListener('click', () => nav.classList.toggle('open'));
+    nav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => nav.classList.remove('open')));
+
+    // ====== Smooth Scroll ======
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', e => {
+        const id = a.getAttribute('href').slice(1);
+        const el = document.getElementById(id);
+        if (el) { e.preventDefault(); el.scrollIntoView({behavior:'smooth', block:'start'}); }
+      });
+    });
+
+    // ====== Aktif link vurgusu ======
+    const links = [...document.querySelectorAll('.navlink')];
+    const sections = links.map(l => document.getElementById(l.getAttribute('href').slice(1)));
+    const obs = new IntersectionObserver((entries)=>{
+      entries.forEach(ent => {
+        if (ent.isIntersecting) {
+          const id = ent.target.id;
+          links.forEach(l => l.classList.toggle('active', l.getAttribute('href') === `#${id}`));
+        }
+      });
+    }, { threshold: .6 });
+    sections.forEach(s => s && obs.observe(s));
+
+    // ====== Reveal on scroll ======
+    const revealEls = document.querySelectorAll('.reveal');
+    const obs2 = new IntersectionObserver(ents=>{
+      ents.forEach(ent=>{ if(ent.isIntersecting){ ent.target.classList.add('show'); obs2.unobserve(ent.target); } });
+    }, { threshold: .2 });
+    revealEls.forEach(el=>obs2.observe(el));
+
+    // ====== Slider ======
+    const slidesWrap = document.getElementById('slides');
+    const slideEls = [...document.querySelectorAll('.slide')];
+    const dotsWrap = document.getElementById('dots');
+    const prev = document.getElementById('prev');
+    const next = document.getElementById('next');
+    const slider = document.getElementById('slider');
+
+    slideEls.forEach(sl => {
+      const src = sl.dataset.bg;
+      sl.style.setProperty('--bg-img', `url('${src}')`);
+      sl.style.setProperty('background-image', `url('${src}')`);
+    });
+    const style = document.createElement('style');
+    style.textContent = `.slide::before{ background-image: var(--bg-img); }`;
+    document.head.appendChild(style);
+
+    let idx = 0, timer = null, delay = 4500, locked = false;
+    const go = (i)=>{ if (locked) return; locked = true; idx = (i + slideEls.length) % slideEls.length;
+      slidesWrap.style.transform = `translateX(-${idx*100}%)`;
+      [...dotsWrap.children].forEach((d,di)=>d.classList.toggle('active', di===idx));
+      setTimeout(()=> locked=false, 620);
+    };
+    const nextSlide = ()=> go(idx+1);
+    const prevSlide = ()=> go(idx-1);
+
+    slideEls.forEach((_,i)=>{ const d = document.createElement('button'); d.className='dot'; d.setAttribute('aria-label',`Slayt ${i+1}`); d.addEventListener('click', ()=>go(i)); dotsWrap.appendChild(d); });
+    next.addEventListener('click', nextSlide);
+    prev.addEventListener('click', prevSlide);
+
+    const play = ()=> timer = setInterval(nextSlide, delay);
+    const stop = ()=> { if(timer) clearInterval(timer); };
+    slider.addEventListener('mouseenter', stop);
+    slider.addEventListener('mouseleave', play);
+    play();
+
+    // Dokunmatik kaydırma
+    let sx=0, dx=0;
+    slider.addEventListener('touchstart', e=>{ stop(); sx = e.touches[0].clientX; }, {passive:true});
+    slider.addEventListener('touchmove', e=>{ dx = e.touches[0].clientX - sx; }, {passive:true});
+    slider.addEventListener('touchend', ()=>{ if (Math.abs(dx) > 40){ dx<0 ? nextSlide() : prevSlide(); } dx=0; play(); });
+
+    // Yıl
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Tema (Gece / Gündüz)
+    const root = document.documentElement;
+    const toggleBtn = document.getElementById('themeToggle');
+    function setIcon(theme){
+      toggleBtn.innerHTML = theme === 'light'
+        ? '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3a7 7 0 1 0 9.79 9.79z"/></svg>'
+        : '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.76 4.84l-1.8-1.79L3.17 4.84l1.79 1.8 1.8-1.8zm10.48 0l1.8-1.79 1.79 1.79-1.79 1.8-1.8-1.8zM12 4V1h0v3zm0 19v-3h0v3zm8-8h3v0h-3zm-19 0h3v0H1zm2.17 7.16l1.79-1.8 1.8 1.8-1.8 1.79-1.79-1.79zM18 19.36l1.8 1.79 1.79-1.79-1.79-1.8L18 19.36zM12 8a4 4 0 100 8 4 4 0 000-8z"/></svg>';
+      toggleBtn.setAttribute('aria-label', theme === 'light' ? 'Gündüz modu açık' : 'Gece modu açık');
+    }
+    function applyTheme(theme){
+      root.setAttribute('data-theme', theme);
+      localStorage.setItem('theme', theme);
+      setIcon(theme);
+    }
+    const storedTheme = localStorage.getItem('theme');
+    const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    applyTheme(storedTheme || (systemPrefersDark ? 'dark' : 'light'));
+    toggleBtn.addEventListener('click', ()=>{
+      const current = root.getAttribute('data-theme') || 'dark';
+      applyTheme(current === 'dark' ? 'light' : 'dark');
+    });
+    try{
+      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e=>{
+        if(!localStorage.getItem('theme')){ applyTheme(e.matches ? 'dark' : 'light'); }
+      });
+    }catch(_){}
+
+    // ====== E-posta seçim penceresi ======
+    const emailModal = document.getElementById('emailModal');
+    const openEmail = document.getElementById('openEmail');
+    const closeEmail = document.getElementById('emailClose');
+
+    const emailTo = 'info@imatek.com';
+    const emailSubject = 'İMATEK web sitesi üzerinden iletişim';
+    const emailBody = 'Merhaba İMATEK,\n\nİlgilendiğim konu: ...\n\nAd Soyad:\nTelefon:\nFirma:\n';
+
+    function toggleEmailModal(open){
+      emailModal.classList.toggle('open', open);
+      emailModal.setAttribute('aria-hidden', open ? 'false' : 'true');
+    }
+
+    openEmail.addEventListener('click', () => toggleEmailModal(true));
+    closeEmail.addEventListener('click', () => toggleEmailModal(false));
+    emailModal.addEventListener('click', (e)=>{ if(e.target === emailModal) toggleEmailModal(false); });
+    document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape') toggleEmailModal(false); });
+
+    emailModal.querySelectorAll('[data-method]').forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        const enc = encodeURIComponent;
+        let url;
+        switch(btn.dataset.method){
+          case 'gmail':
+            url = `https://mail.google.com/mail/?view=cm&fs=1&to=${enc(emailTo)}&su=${enc(emailSubject)}&body=${enc(emailBody)}`;
+            break;
+          case 'outlook':
+            url = `https://outlook.office.com/mail/deeplink/compose?to=${enc(emailTo)}&subject=${enc(emailSubject)}&body=${enc(emailBody)}`;
+            break;
+          case 'yahoo':
+            url = `https://compose.mail.yahoo.com/?to=${enc(emailTo)}&subject=${enc(emailSubject)}&body=${enc(emailBody)}`;
+            break;
+          default:
+            url = `mailto:${emailTo}?subject=${enc(emailSubject)}&body=${enc(emailBody)}`;
+        }
+        window.open(url, '_blank', 'noopener');
+        toggleEmailModal(false);
+      });
+    });
+  </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
